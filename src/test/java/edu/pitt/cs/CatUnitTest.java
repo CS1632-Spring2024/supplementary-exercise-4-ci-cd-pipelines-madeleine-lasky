@@ -7,9 +7,6 @@ import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 import static org.junit.Assert.*;
 
-import org.mockito.Mockito;
-import static org.mockito.Mockito.*;
-
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CatUnitTest {
 
@@ -29,9 +26,7 @@ public class CatUnitTest {
 
 		// Create a Cat with ID 1 and name "Jennyanydots", assign to c using a call to Cat.createInstance(InstanceType, int, String).
 		// Passing InstanceType.IMPL as the first parameter will create a real cat using your CatImpl implementation.
-		// Passing InstanceType.MOCK as the first parameter will create a mock cat using Mockito.
-		// Which type is the correct choice for this unit test?  I'll leave it up to you.  The answer is in the Unit Testing Part 2 lecture. :)
-		// TODO: Fill in
+		c = Cat.createInstance(InstanceType.IMPL, 1, "Jennyanydots");
 	}
 
 	@After
@@ -52,11 +47,15 @@ public class CatUnitTest {
 	 */
 	@Test
 	public void testGetId() {
-		// TODO: Fill in
+		// Execution steps
+		int id = c.getId();
+
+		// Postconditions
+		assertEquals(1, id);
 	}
 
 	/**
-	 * Test case for int getName().
+	 * Test case for String getName().
 	 * 
 	 * <pre>
 	 * Preconditions: c has been created with ID 1, and name "Jennyanydots".
@@ -66,7 +65,11 @@ public class CatUnitTest {
 	 */
 	@Test
 	public void testGetName() {
-		// TODO: Fill in
+		// Execution steps
+		String name = c.getName();
+
+		// Postconditions
+		assertEquals("Jennyanydots", name);
 	}
 
 	/**
@@ -80,7 +83,11 @@ public class CatUnitTest {
 	 */
 	@Test
 	public void testGetRented() {
-		// TODO: Fill in
+		// Execution Steps
+		boolean isRented = c.getRented();
+
+		// Postconditions
+		assertEquals(false, isRented);
 	}
 
 	/**
@@ -94,7 +101,11 @@ public class CatUnitTest {
 	 */
 	@Test
 	public void testToString() {
-		// TODO: Fill in
+		// Execution Steps
+		String catToString = c.toString();
+
+		// Postconditions
+		assertEquals("ID 1. Jennyanydots", catToString);
 	}
 
 	/**
@@ -109,7 +120,12 @@ public class CatUnitTest {
 	 */
 	@Test
 	public void testRentCat() {
-		// TODO: Fill in
+		// Execution steps
+		c.rentCat();
+		boolean isRented = c.getRented();
+
+		// Postconditions
+		assertTrue(isRented);
 	}
 
 	/**
@@ -125,7 +141,15 @@ public class CatUnitTest {
 	 */
 	@Test
 	public void testReturnCat() {
-		// TODO: Fill in
+		// Preconditions
+		c.rentCat();
+
+		// Execution steps
+		c.returnCat();
+		boolean isRented = c.getRented();
+
+		// Postconditions
+		assertFalse(isRented);
 	}
 
 	/**
@@ -140,7 +164,12 @@ public class CatUnitTest {
 	 */
 	@Test
 	public void testRenameCat() {
-		// TODO: Fill in
+		// Execution steps
+		c.renameCat("Garfield");
+		
+		// Postconditions
+		assertEquals("Garfield", c.getName());
+		assertEquals("ID 1. Garfield", c.toString());
 	}
 
 }
